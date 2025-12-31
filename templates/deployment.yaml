@@ -4,16 +4,15 @@ metadata:
   name: shipping
   namespace: roboshop
 data:
-  CART_ENDPOINT: "cart:8080"
-  DB_HOST: "mysql"
-
+  CART_ENDPOINT: "{{ .Values.configMap.CART_ENDPOINT }}"
+  DB_HOST: "{{ .Values.configMap.DB_HOST }}"
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: shipping
   namespace: roboshop
+  # these are replica set labels
   labels:
     project: roboshop
     component: shipping
@@ -21,10 +20,12 @@ metadata:
 spec:
   replicas: 1
   selector:
+    # these labels are used to select pods
     matchLabels:
       project: roboshop
       component: shipping
       tier: backend
+  # pod definition
   template:
     metadata:
       labels:
@@ -34,7 +35,7 @@ spec:
     spec:
       containers:
       - name: shipping
-        image: "{{ .Values.deployment.imageid }}:{{ .Values.deployment.version }}"
+        image: "{{ .Values.deployment.imageid }}:{{ .Values.deployment.version}}"
         imagePullPolicy: Always
         envFrom:
         - configMapRef:
