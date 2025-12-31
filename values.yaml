@@ -1,4 +1,7 @@
 deployment:
-  imageid: 848332098195.dkr.ecr.us-east-1.amazonaws.com/roboshop/shipping
-  tag: 1.0
+  # imageid: 848332098195.dkr.ecr.us-east-1.amazonaws.com/roboshop/shipping
+  # tag: 1.0
+  image:
+  repository: 848332098195.dkr.ecr.us-east-1.amazonaws.com/roboshop/shipping
+  tag: "1.0"
   version: IMAGE_VERSION
